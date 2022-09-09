@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>
+            Страница пользователя {{ user.username }}.
+        </h1>
+        <button type="button" class="btn btn-outline-success">Настройки</button>
+        {% for idea in page_obj %}
+          <article>
+            <ul>
+                <li> 
+                  Автор: 
+                  {{ idea.author.get_full_name }}
+                </li>
+                <li>
+                  Дата публикации:
+                  {{ idea.pub_date|date:"d E Y" }}
+                </li>
+            </ul>
+            <p>
+              {{ idea.text }}
+            </p>
+            <a href="{% url 'main:idea_detail' idea.id %}">подробная информация</a>
+          </article> 
+          {% if not forloop.last %} 
+            <hr>
+          {% endif %} 
+        {% endfor %}
+        {% include 'includes/paginator.html' %}
+    </div>
+{% endblock %}

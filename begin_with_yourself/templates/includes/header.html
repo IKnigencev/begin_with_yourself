@@ -1,0 +1,37 @@
+{% with request.resolver_match.view_name as view_name %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'main:index' %}">
+        {% comment %}<img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">{% endcomment %}
+        <span style="color:green">BE</span>GIN WITH <span style="color:green">YOURSELF</span>
+      </a> 
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'news:news' %}">Новости</a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:map' %}">Карта</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'main:create_idea' %}active{% endif %}" href="{% url 'main:create_idea' %}">Новый проект</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'main:profile' %}active{% endif %}" href="{% url 'main:profile' user.id %}"><span style="color:green;">Мой профиль</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:logout' %}">Выйти</a>
+        </li> 
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'users:login' %}active{% endif %}" href="{% url 'users:login' %}">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name  == 'users:signup' %}active{% endif %}" href="{% url 'users:signup' %}">Зарегистрироваться</a>
+        </li> 
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endwith %}

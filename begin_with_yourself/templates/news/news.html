@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Страница последних новостей.
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>
+            Последние новости.
+        </h1>
+        {% for idea in page_obj %}
+            <article>
+                {{ idea.text }}
+            </arcticle>
+            {% if not forloop.last %}
+                <hr>
+            {% endif %}
+        {% endfor %}
+        {% include 'includes/paginator.html' %}
+    </div>
+{% endblock %}

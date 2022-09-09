@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Главаная страница.
+{% endblock %}
+
+{% block script %}
+<script>
+    L_NO_TOUCH = false;
+    L_DISABLE_3D = false;
+</script>
+{% endblock %}
+
+{% block content %}
+    <div id="map-folium">
+        {% include 'includes/mapFolium.html' %}
+    </div>
+{% endblock %}
+
+{% block basescript %}
+{% endblock %}
